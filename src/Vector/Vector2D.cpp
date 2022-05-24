@@ -27,18 +27,18 @@ const char* Vector2D::static_prefix()
 	return "2d";
 }
 
-IVector* Vector2D::Type(charline chl)
+IReadable* Vector2D::Type(charline chl)
 {
 	double x = atof(chl.ClearForSign());
 	double y = atof(chl.ClearForSign());
-	return new Vector2D(x,y);
+	return new Vector2D(x, y);
 }
 
 char* Vector2D::WriteDataInFile()
 {
-	string conv = "2d " + to_string((float)_x) + "," + to_string((float)_y) + "\n";
-	char* str = const_cast<char*>(conv.c_str());
-	return str;
+	string conv = "2d " + to_string((float)_x) + "," + to_string((float)_y);
+	charline value = conv;
+	return value.GetArrayChar();
 }
 
 void Vector2D::Print()

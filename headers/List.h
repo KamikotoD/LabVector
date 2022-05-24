@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _List_
+#define _List_
 #include <iostream>
 using namespace std;
 template <typename T>
@@ -89,4 +91,4 @@ public:
 		_size_memory = _additional_memory;
 	}
 };
-
+#endif

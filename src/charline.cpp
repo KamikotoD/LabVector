@@ -12,6 +12,14 @@ charline::charline(const charline& chl)
 	strcpy(_char_line, chl._char_line);
 }
 
+charline::charline(string& str)
+{
+	_size = str.size() + 1;
+	_char_line = new char[_size];
+	for (size_t i = 0; i < _size; i++)
+		_char_line[i] = str[i];
+}
+
 charline::charline(const char* chl)
 {
 	_size = strlen(chl);
@@ -136,6 +144,14 @@ char* charline::operator=(charline chl) {
 	char* temp = new char[chl._size];
 	strcpy(temp, chl._char_line);
 	return temp;
+}
+char* charline::GetArrayChar()
+{
+	return _char_line;
+}
+charline charline::operator=(string str)
+{
+	return charline(str);
 }
 charline charline::operator=(char* chl) {
 	delete[]_char_line;

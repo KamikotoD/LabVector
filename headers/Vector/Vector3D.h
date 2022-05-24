@@ -1,7 +1,10 @@
 #pragma once
+#ifndef _Vector3D_
+#define _Vector3D_
 #include "Vector.h"
 #include "../IReadable.h"
-class Vector3D : public IVector, public IReadable
+#include "../IWritable.h"
+class Vector3D : public IVector
 {
 private:
 	double _x;
@@ -12,9 +15,9 @@ public:
 	Vector3D(double x, double y, double z);
 	double LongVectorAB()override;
 	const char* prefix()override;
-	IVector* Type(charline chl)override;
+	IReadable* Type(charline chl)override;
 	char* WriteDataInFile()override;
 	void Print()override;
 	static const char* static_prefix();
 };
-
+#endif

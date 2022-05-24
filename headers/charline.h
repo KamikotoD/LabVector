@@ -1,6 +1,7 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-
+#ifndef _charline_
+#define _charline_
 #include "List.h"
 #include <iostream>
 #include <string>
@@ -14,6 +15,7 @@ private:
 public:
     charline();
     charline(const charline& chl);
+    charline(string& str);
     charline(const char* chl);
     ~charline();
     size_t length() const { return _size; };
@@ -24,7 +26,10 @@ public:
     bool operator ==(char* arr);
     bool operator ==(charline arr);
     char* operator=(charline chl);
+    char* GetArrayChar();
+    charline operator=(string str);
     charline operator=(char* chl);
     friend istream& operator >>(istream& in, charline& chl);
     friend ostream& operator <<(ostream& out, const charline& chl);
 };
+#endif

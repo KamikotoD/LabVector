@@ -27,18 +27,18 @@ const char* Vector3D::static_prefix()
 {
 	return "3d";
 }
-IVector* Vector3D::Type(charline chl)
+IReadable* Vector3D::Type(charline chl)
 {
 	double x = atof(chl.ClearForSign());
 	double y = atof(chl.ClearForSign());
 	double z = atof(chl.ClearForSign());
-	return new Vector3D(x,y,z);
+	return new Vector3D(x, y, z);
 }
 char* Vector3D::WriteDataInFile()
 {
-	string conv = "3d " + to_string((float)_x) + "," + to_string((float)_y) + "," + to_string((float)_z) + "\n";
-	char* str = const_cast<char*>(conv.c_str());
-	return str;
+	string conv = "3d " + to_string((float)_x) + "," + to_string((float)_y) + "," + to_string((float)_z);
+	charline value = conv;
+	return value.GetArrayChar();
 }
 void Vector3D::Print()
 {

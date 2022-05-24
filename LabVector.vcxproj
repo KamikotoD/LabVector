@@ -141,18 +141,22 @@
   <ItemGroup>
     <ClCompile Include="LabVector.cpp" />
     <ClCompile Include="src\charline.cpp" />
-    <ClCompile Include="src\function.cpp" />
+    <ClCompile Include="src\Readable.cpp" />
     <ClCompile Include="src\Vector\Vector2D.cpp" />
     <ClCompile Include="src\Vector\Vector3D.cpp" />
+    <ClCompile Include="src\Writable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\charline.h" />
-    <ClInclude Include="headers\function.h" />
     <ClInclude Include="headers\IReadable.h" />
+    <ClInclude Include="headers\IWritable.h" />
     <ClInclude Include="headers\List.h" />
+    <ClInclude Include="headers\Readable.h" />
     <ClInclude Include="headers\Vector\Vector.h" />
     <ClInclude Include="headers\Vector\Vector2D.h" />
     <ClInclude Include="headers\Vector\Vector3D.h" />
+    <ClInclude Include="headers\Writable.h" />
+    <ClInclude Include="LabVector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DataFile.txt" />

@@ -1,12 +1,15 @@
 #pragma once
+#ifndef _IVector_
+#define _IVector_
 #include <math.h>
 #define PI 3.14159265
+#include"../IReadable.h"
+#include "../IWritable.h"
 #include <iostream>
 using namespace std;
-class IVector
+class IVector : public IReadable, public IWritable
 {
 public: 
-	virtual char* WriteDataInFile() = 0;
 	virtual double LongVectorAB() = 0;
 	virtual void Print() = 0;
 	//virtual void operator*=(double value) = 0;
@@ -20,3 +23,4 @@ public:
 	/*virtual bool operator>(IVector vec);
 	virtual bool operator<(IVector vec);*/
 };
+#endif

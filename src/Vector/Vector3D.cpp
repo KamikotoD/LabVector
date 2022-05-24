@@ -32,13 +32,15 @@ IVector* Vector3D::Type(charline chl)
 	double x = atof(chl.ClearForSign());
 	double y = atof(chl.ClearForSign());
 	double z = atof(chl.ClearForSign());
-	return Vec(Vector3D(x,y,z));
+	return new Vector3D(x,y,z);
+}
+char* Vector3D::WriteDataInFile()
+{
+	string conv = "3d " + to_string((float)_x) + "," + to_string((float)_y) + "," + to_string((float)_z) + "\n";
+	char* str = const_cast<char*>(conv.c_str());
+	return str;
 }
 void Vector3D::Print()
 {
 	cout << _x << " , " << _y << " , " << _z<< endl;
-}
-IVector* Vector3D::Vec(Vector3D vec)
-{
-	return &vec;
 }

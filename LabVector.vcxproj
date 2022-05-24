@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="LabVector.cpp" />
     <ClCompile Include="src\charline.cpp" />
+    <ClCompile Include="src\function.cpp" />
     <ClCompile Include="src\Vector\Vector2D.cpp" />
     <ClCompile Include="src\Vector\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\charline.h" />
+    <ClInclude Include="headers\function.h" />
     <ClInclude Include="headers\IReadable.h" />
     <ClInclude Include="headers\List.h" />
     <ClInclude Include="headers\Vector\Vector.h" />

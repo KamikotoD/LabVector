@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector.h"
 #include "../IReadable.h"
-#include"../charline.h"
 class Vector2D : public IVector, public IReadable
 {
 private:
@@ -13,9 +12,9 @@ public:
 	double LongVectorAB()override;	
 	const char* prefix()override;
 	IVector* Type(charline chl)override;
+	char* WriteDataInFile()override;
 	void Print()override;
 	static const char* static_prefix();
-	static IVector* Vec(Vector2D vec);
 
 
 

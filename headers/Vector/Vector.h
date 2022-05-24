@@ -6,6 +6,7 @@ using namespace std;
 class IVector
 {
 public: 
+	virtual char* WriteDataInFile() = 0;
 	virtual double LongVectorAB() = 0;
 	virtual void Print() = 0;
 	//virtual void operator*=(double value) = 0;

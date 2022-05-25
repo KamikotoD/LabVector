@@ -14,7 +14,6 @@ public:
 	Vector3D();
 	Vector3D(double x, double y, double z);
 	Vector3D(Vector3D& vec);
-	Vector3D(IVector* vec);
 	double LongVectorAB()override;
 	const char* prefix()override;
 	IReadable* Type(charline chl)override;

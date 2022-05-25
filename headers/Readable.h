@@ -9,7 +9,7 @@
 class Readable
 {
 public:
-	void ReadableDataFromFile(List<IReadable*> &vectors_read, const char* name_file = "DataFile.txt");
+	void ReadFromFile(List<IReadable*> &vectors_read, const char* name_file = "DataFile.txt");
 };
 #endif
 

@@ -15,6 +15,7 @@ using namespace std;
 void SortVectors(List<IVector*> vec, char sign);
 int ChoiceOfVector();
 void OperationOnVectors(List<IVector*> vector);
+bool proccessInput(List<Vector2D> vec2d, List<Vector3D> vec3d);
 enum Menu {
     PrintArrayVectors = 1,
     AddVector,
@@ -45,9 +46,8 @@ int main()
 	bool working = true;
 	int switch_on, count, numbers;
 	char sign;
-	Vector2D val2d;
-	Vector3D val3d;
-	IReadable* temp_val;
+	Vector2D *val2d = new Vector2D();
+	Vector3D *val3d = new Vector3D();
 	List<Vector2D> vec2d;
 	List<Vector3D> vec3d;
     List<IVector*> vector;
@@ -55,7 +55,7 @@ int main()
     vectors_read.Add(new Vector2D());
     vectors_read.Add(new Vector3D());
 	//—читывание данных
-    DataFromFile.ReadableDataFromFile(vectors_read);
+    DataFromFile.ReadFromFile(vectors_read);
     for (size_t i = 0; i < vectors_read.Count(); i++)
     {
         vector.Add((IVector*)vectors_read[i]);
@@ -71,7 +71,7 @@ int main()
 		case PrintArrayVectors:
 			for (size_t i = 0; i < vector.Count(); i++)
 			{
-				cout << i + 1 << ") ";
+				cout << i << ") ";
 				vector[i]->Print();
 			}
 			break;
@@ -79,12 +79,12 @@ int main()
 			switch_on = ChoiceOfVector();
 			printf("Enter value:");
 			if (switch_on == 1){
-				cin >> val2d;
-				vector.Add(&val2d);
+				cin >> *val2d;
+				vector.Add(val2d);
 			}
 			else{
-				cin >> val3d;
-				vector.Add(&val3d);
+				cin >> *val3d;
+				vector.Add(val3d);
 			}
 			break;
 		case RemoveElemensArray:
@@ -98,7 +98,7 @@ int main()
 			break;
 		case SortVector:
 			printf("Enter the sign (max -> min{>} or min -> max{<} ): ");
-			scanf_s(" %c", &sign);
+			cin >> sign;//scanf_s(" %c", &sign);
 			SortVectors(vector, sign);
 			break;
 		case SaveAndExit:
@@ -106,7 +106,7 @@ int main()
 			{
 				vectors_write.Add(vector[i]);
 			}
-			DataInFile.WritableDataInFile(vectors_write);
+			DataInFile.WriteInFile(vectors_write);
 			working = false;
 			break;
 		default:
@@ -114,6 +114,20 @@ int main()
 			break;
 		}
 	}
+	delete val2d;
+	delete val3d;
+	/*for (size_t i = 0; i < vectors_read.Count(); i++)
+	{
+		delete vectors_read[i];
+	}
+	for (size_t i = 0; i < vector.Count(); i++)
+	{
+		delete vector[i];
+	}
+	for (size_t i = 0; i < vectors_write.Count(); i++)
+	{
+		delete vectors_write[i];
+	}*/
 }
 int ChoiceOfVector() {
 	int switch_on;
@@ -137,80 +151,85 @@ int ChoiceOfVector() {
 	}
 	return switch_on;
 }
+bool proccessInput(List<Vector2D> vec2d, List<Vector3D> vec3d) {
+	bool operationWorking = true;
+	int switch_on, count, numbers;
+	printf("\n1. VectorCollinearity\n2. LongVector\n3. ScalarMultiplication\n4. DegreesBetweenAxix\n5. DegreesBetweenVectors\n6. Come back\nChoose one option : ");
+	scanf_s("%d", &switch_on);
+	switch ((OpretionsOfVectors)switch_on)
+	{
+	case VectorCollinearity:
+		switch_on = ChoiceOfVector();
+		printf("Enter the numbers of two vectors : ");
+		cin >> count >> numbers;
+		//scanf_s("%d", "%d", count, numbers);
+		if (switch_on == 1)
+			vec2d[count].VectorCollinearity(vec2d[numbers]);
+		else
+			vec3d[count].VectorCollinearity(vec3d[numbers]);
+		break;
+	case LongVector:
+		switch_on = ChoiceOfVector();
+		printf("Enter the number of vector : ");
+		scanf_s("%d", &count);
+		if (switch_on == 1)
+			printf("Long vector[%d] = %lf", count, vec2d[count].LongVectorAB());
+		else
+			printf("Long vector[%d] = %lf", count, vec3d[count].LongVectorAB());
+		break;
+	case ScalarMultiplication:
+		switch_on = ChoiceOfVector();
+		printf("Enter the numbers of two vectors : ");
+		cin >> count >> numbers;//scanf_s("%d", "%d", count, numbers);
+		if (switch_on == 1)
+			printf("Scalar multiplication : %lf", vec2d[count] * vec2d[numbers]);
+		else
+			printf("Scalar multiplication : %lf", vec3d[count] * vec3d[numbers]);
+		break;
+	case DegreesBetweenAxix:
+		switch_on = ChoiceOfVector();
+		printf("Enter the number of vector : ");
+		scanf_s("%d", &count);
+		if (switch_on == 1)
+			vec2d[count].DegreesBetweenAxis();
+		else
+			vec3d[count].DegreesBetweenAxis();
+		break;
+	case DegreesBetweenVectors:
+		switch_on = ChoiceOfVector();
+		printf("Enter the numbers of two vectors : ");
+		cin >> count >> numbers;//scanf_s("%d", "%d", count, numbers);
+		if (switch_on == 1)
+			printf("Degrees between vectors: %lf", vec2d[count].DegreesBetweenVectors(vec2d[numbers]));
+		else
+			printf("Degrees between vectors: %lf", vec3d[count].DegreesBetweenVectors(vec3d[numbers]));
+		break;
+	case ComeBack:
+		operationWorking = false;
+		break;
+	default:
+		printf("This option don`t exist\n");
+		break;
+	}
+	return operationWorking;
+}
 void OperationOnVectors(List<IVector*> vector) {
 	List<Vector2D> vec2d;
-	List<Vector2D> vec3d;
-	Vector2D T2d;
+	List<Vector3D> vec3d;
+	Vector2D*T2d;
+	Vector3D*T3d;
 	for (size_t i = 0; i < vector.Count(); i++)
 	{
 		if (vector[i]->prefix() == Vector2D::static_prefix()) {
-			vec2d.Add((Vector2D)*vector[i]);
+			T2d = (Vector2D*)vector[i];
+			vec2d.Add(*T2d);
 		}
 		else {
-			vec3d.Add(vector[i]);
+			T3d = (Vector3D*)vector[i];
+			vec3d.Add(*T3d);
 		}
 	}
-	bool operationWorking = true;
-	int switch_on, count, numbers;
-	while (operationWorking)
-	{
-		printf("\n1. VectorCollinearity\n2. LongVector\n3. ScalarMultiplication\n4. DegreesBetweenAxix\n5. DegreesBetweenVectors\n6. Come back\nChoose one option : ");
-		scanf_s("%d", &switch_on);
-		switch ((OpretionsOfVectors)switch_on)
-		{
-		case VectorCollinearity:
-			switch_on = ChoiceOfVector();
-			printf("Enter the numbers of two vectors : ");
-			scanf_s("%d", "%d", &count, &numbers);
-			if (switch_on == 1)
-				vec2d[count].VectorCollinearity(vec2d[numbers]);
-			else
-				vec3d[count].VectorCollinearity(vec3d[numbers]);
-			break;
-		case LongVector:
-			switch_on = ChoiceOfVector();
-			printf("Enter the number of vector : ");
-			scanf_s("%d", &count);
-			if (switch_on == 1)
-				printf("Long vector[%d] = %lf", count, vec2d[count].LongVectorAB());
-			else
-				printf("Long vector[%d] = %lf", count, vec3d[count].LongVectorAB());
-			break;
-		case ScalarMultiplication:
-			switch_on = ChoiceOfVector();
-			printf("Enter the numbers of two vectors : ");
-			scanf_s("%d", "%d", &count, &numbers);
-			if (switch_on == 1)
-				printf("Scalar multiplication : %lf", vec2d[count] * vec2d[numbers]);
-			else
-				printf("Scalar multiplication : %lf", vec3d[count] * vec3d[numbers]);
-			break;
-		case DegreesBetweenAxix:
-			switch_on = ChoiceOfVector();
-			printf("Enter the number of vector : ");
-			scanf_s("%d", &count);
-			if (switch_on == 1)
-				vec2d[count].DegreesBetweenAxis();
-			else
-				vec3d[count].DegreesBetweenAxis();
-			break;
-		case DegreesBetweenVectors:
-			switch_on = ChoiceOfVector();
-			printf("Enter the numbers of two vectors : ");
-			scanf_s("%d", "%d", &count, &numbers);
-			if (switch_on == 1)
-				printf("Degrees between vectors: %lf", vec2d[count].DegreesBetweenVectors(vec2d[numbers]));
-			else
-				printf("Degrees between vectors: %lf", vec3d[count].DegreesBetweenVectors(vec3d[numbers]));
-			break;
-		case ComeBack:
-			operationWorking = false;
-			break;
-		default:
-			printf("This option don`t exist\n");
-			break;
-		}
-	}
+	while(proccessInput(vec2d,vec3d)){}
 }
 void SortVectors(List<IVector*> vec, char sign) {
 	IVector* temp;
@@ -230,4 +249,3 @@ void SortVectors(List<IVector*> vec, char sign) {
 		vec[num] = temp;
 	}
 }
-

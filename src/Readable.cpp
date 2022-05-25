@@ -1,6 +1,6 @@
 #include "../headers/Readable.h"
 
-void Readable::ReadableDataFromFile(List<IReadable*> &vectors_read, const char* name_file)
+void Readable::ReadFromFile(List<IReadable*> &vectors_read, const char* name_file)
 {
 	ifstream file;
 	List<IReadable*> vector;

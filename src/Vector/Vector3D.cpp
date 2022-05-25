@@ -20,11 +20,6 @@ Vector3D::Vector3D(Vector3D& vec)
 	_z = vec._z;
 }
 
-Vector3D::Vector3D(IVector* vec)
-{
-	vec->Value();
-}
-
 double Vector3D::LongVectorAB()
 {
 	return sqrt(pow(_x, 2) + pow(_y, 2) + pow(_z,2));

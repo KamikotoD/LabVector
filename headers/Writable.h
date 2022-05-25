@@ -10,7 +10,7 @@
 class Writable
 {
 public:
-    void WritableDataInFile(List<IWritable*> vector, const char* name_file = "DataFile.txt");
+    void WriteInFile(List<IWritable*> vector, const char* name_file = "DataFile.txt");
 };
 #endif
 

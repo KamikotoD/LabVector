@@ -13,7 +13,6 @@ public:
 	Vector2D();
 	Vector2D(double x, double y);
 	Vector2D(Vector2D& vec);
-	//Vector2D(IVector* vec);
 	double LongVectorAB()override;	
 	const char* prefix()override;
 	IReadable* Type(charline chl)override;

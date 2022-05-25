@@ -1,6 +1,6 @@
 #include "../headers/Writable.h"
 
-void Writable::WritableDataInFile(List<IWritable*> vector, const char* name_file)
+void Writable::WriteInFile(List<IWritable*> vector, const char* name_file)
 {
     ofstream file;
     file.open(name_file);

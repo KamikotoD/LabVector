@@ -17,12 +17,6 @@ Vector2D::Vector2D(Vector2D& vec)
 	_x = vec._x;
 	_y = vec._y;
 }
-
-Vector2D::Vector2D(IVector* vec)
-{
-	
-}
-
 double Vector2D::LongVectorAB()
 {
 	return sqrt(pow(_x, 2) + pow(_y, 2));
